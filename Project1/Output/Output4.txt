@@ -1,0 +1,18 @@
+b1; - Operation is Successful => Transaction 1 has started
+r1 (Y); - Operation is successful => Y is locked by 1
+w1 (Y); - Operation is Successful => Lock on Y by 1 upgraded to Write-Lock
+r1 (Z); - Operation is successful => Z is locked by 1
+b2; - Operation is Successful => Transaction 2 has started
+r2 (Y); - Operation is Unsuccessful => Transaction 2 is Aborted
+b3; - Operation is Successful => Transaction 3 has started
+r3 (Z); - Operation is successful => Z is locked by 3
+w1 (Z); - Operation is Unsuccessful => Transaction 1 is Blocked
+w2 (Y); - Operation is Ignored
+r2 (X); - Operation is Ignored
+e1;	 - Operation is Successful => Operation added to Operation list
+e3; - Operation is Successful => Transaction 3 has Committed
+Inside ActiveTransaction List
+w1 (Z); - Operation is Successful => Lock on Z by 1 upgraded to Write-Lock
+e1;	 - Operation is Successful => Transaction 1 has Committed
+w2 (X); - Operation is Ignored
+e2; - Operation is Ignored

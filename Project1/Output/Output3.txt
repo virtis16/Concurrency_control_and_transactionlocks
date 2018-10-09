@@ -1,0 +1,18 @@
+b1; - Operation is Successful => Transaction 1 has started
+r1 (Y); - Operation is successful => Y is locked by 1
+w1 (Y); - Operation is Successful => Lock on Y by 1 upgraded to Write-Lock
+r1 (Z); - Operation is successful => Z is locked by 1
+b2; - Operation is Successful => Transaction 2 has started
+r2 (X); - Operation is successful => X is locked by 2
+w2 (X); - Operation is Successful => Lock on X by 2 upgraded to Write-Lock
+w1 (Z); - Operation is Successful => Lock on Z by 1 upgraded to Write-Lock
+r2 (Y); - Operation is Unsuccessful => Transaction 2 is Aborted
+b3; - Operation is Successful => Transaction 3 has started
+r3 (Z); - Operation is Unsuccessful => Transaction 3 is Aborted
+e1; - Operation is Successful => Transaction 1 has Committed
+w3 (Z);	 - Operation is Ignored
+w2 (Y); - Operation is Ignored
+e2; - Operation is Ignored
+r3 (X); - Operation is Ignored
+w3 (X); - Operation is Ignored
+e3; - Operation is Ignored
